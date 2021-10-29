@@ -3,11 +3,9 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>[%highlight(%-5level)] [%date{dd/MM/yyyy HH:mm:ss.SSS}] [%green(%X{akkaSource})] %cyan(%logger{1}) - %msg%n MDC: {%mdc}%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} %-5level [%-20.20thread] %-36.36logger{36}  %msg%n%rEx</pattern>
         </encoder>
     </appender>
-
-    <logger name="org.apache.kafka" level="ERROR"/>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
