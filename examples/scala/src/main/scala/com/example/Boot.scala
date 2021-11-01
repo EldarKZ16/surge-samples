@@ -6,7 +6,7 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
 import com.example.account.BankAccount
-import com.example.http.request.{CreateAccountRequest, CreditAccountRequest}
+import com.example.http.request.{CreateAccountRequest, CreditAccountRequest, DebitAccountRequest}
 import com.example.http.serializer.BankAccountRequestSerializer
 import de.heikoseeberger.akkahttpplayjson.PlayJsonSupport
 import org.slf4j.{LoggerFactory, MDC}
@@ -46,6 +46,22 @@ object Boot extends App with PlayJsonSupport with BankAccountRequestSerializer {
         path("credit") {
           post {
             entity(as[CreditAccountRequest]) { request =>
+              val accountCommand = requestToCommand(request)
+              val accountF: Future[Option[BankAccount]] = BankAccountEngine.surgeEngine.aggregateFor(accountCommand.accountNumber).sendCommand(accountCommand).map {
+                case CommandSuccess(aggregateState) => aggregateState
+                case CommandFailure(reason)         => throw reason
+              }
+
+              onSuccess(accountF) {
+                case Some(account) => complete(account)
+                case None => complete(StatusCodes.InternalServerError)
+              }
+            }
+          }
+        },
+        path("debit") {
+          post {
+            entity(as[DebitAccountRequest]) { request =>
               val accountCommand = requestToCommand(request)
               val accountF: Future[Option[BankAccount]] = BankAccountEngine.surgeEngine.aggregateFor(accountCommand.accountNumber).sendCommand(accountCommand).map {
                 case CommandSuccess(aggregateState) => aggregateState
