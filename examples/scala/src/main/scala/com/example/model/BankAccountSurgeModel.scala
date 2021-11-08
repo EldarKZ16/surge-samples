@@ -17,9 +17,9 @@ object BankAccountSurgeModel extends SurgeCommandBusinessLogic[UUID, BankAccount
 
   override def aggregateName: String = "bank-account"
 
-  override def stateTopic: KafkaTopic = KafkaTopic("state")
+  override def stateTopic: KafkaTopic = KafkaTopic("bank-account-state")
 
-  override def eventsTopic: KafkaTopic = KafkaTopic("events")
+  override def eventsTopic: KafkaTopic = KafkaTopic("bank-account-events")
 
   override def aggregateReadFormatting: SurgeAggregateReadFormatting[BankAccount] = (bytes: Array[Byte]) => Json.parse(bytes).asOpt[BankAccount]
 

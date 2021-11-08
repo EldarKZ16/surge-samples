@@ -7,8 +7,8 @@ object KafkaBroker extends App with EmbeddedKafka {
   val log = LoggerFactory.getLogger(this.getClass)
 
   val port = 9092
-  val stateTopic = "state"
-  val eventsTopic = "events"
+  val stateTopic = "bank-account-state"
+  val eventsTopic = "bank-account-events"
   val partitions = 16
 
   implicit val config: EmbeddedKafkaConfig = EmbeddedKafkaConfig(kafkaPort = port)
