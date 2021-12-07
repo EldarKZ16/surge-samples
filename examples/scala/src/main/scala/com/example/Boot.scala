@@ -82,40 +82,6 @@ object Boot extends App with PlayJsonSupport with BankAccountRequestSerializer {
             }
           }
         },
-        path("credit") {
-          post {
-            entity(as[CreditAccountRequest]) { request =>
-              val accountCommand = requestToCommand(request)
-              MDC.put("account_number", accountCommand.accountNumber.toString)
-              val accountF: Future[Option[BankAccount]] = BankAccountEngine.surgeEngine.aggregateFor(accountCommand.accountNumber).sendCommand(accountCommand).map {
-                case CommandSuccess(aggregateState) => aggregateState
-                case CommandFailure(reason)         => throw reason
-              }
-
-              onSuccess(accountF) {
-                case Some(account) => complete(account)
-                case None => complete(StatusCodes.InternalServerError)
-              }
-            }
-          }
-        },
-        path("debit") {
-          post {
-            entity(as[DebitAccountRequest]) { request =>
-              val accountCommand = requestToCommand(request)
-              MDC.put("account_number", accountCommand.accountNumber.toString)
-              val accountF: Future[Option[BankAccount]] = BankAccountEngine.surgeEngine.aggregateFor(accountCommand.accountNumber).sendCommand(accountCommand).map {
-                case CommandSuccess(aggregateState) => aggregateState
-                case CommandFailure(reason)         => throw reason
-              }
-
-              onSuccess(accountF) {
-                case Some(account) => complete(account)
-                case None => complete(StatusCodes.InternalServerError)
-              }
-            }
-          }
-        },
         path(JavaUUID) { uuid =>
           get {
             MDC.put("account_number", uuid.toString)
