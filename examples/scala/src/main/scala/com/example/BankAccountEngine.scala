@@ -11,7 +11,7 @@ import surge.scaladsl.command.SurgeCommand
 import java.util.UUID
 
 object BankAccountEngine {
-  lazy val surgeEngine: SurgeCommand[UUID, BankAccount, BankAccountCommand, Nothing, BankAccountEvent] = {
+  lazy val surgeEngine: SurgeCommand[UUID, BankAccount, BankAccountCommand, BankAccountEvent] = {
     val engine = SurgeCommand(BankAccountSurgeModel)
     engine.start()
     engine
