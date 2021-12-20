@@ -2,7 +2,7 @@
 
 package com.example.http.request
 
-import com.example.command.{CreateAccount, CreditAccount, DebitAccount}
+import com.example.command.{ CreateAccount, CreditAccount, DebitAccount }
 
 import java.util.UUID
 

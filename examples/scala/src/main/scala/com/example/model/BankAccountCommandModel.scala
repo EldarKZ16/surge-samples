@@ -4,12 +4,12 @@ package com.example.model
 
 import surge.scaladsl.command.AggregateCommandModel
 
-import scala.util.{Failure, Success, Try}
+import scala.util.{ Failure, Success, Try }
 import com.example.account.BankAccount
 import com.example.command._
 import com.example.event._
 import com.example.exception._
-import org.slf4j.{Logger, LoggerFactory}
+import org.slf4j.{ Logger, LoggerFactory }
 
 object BankAccountCommandModel extends AggregateCommandModel[BankAccount, BankAccountCommand, BankAccountEvent] {
   val log: Logger = LoggerFactory.getLogger(getClass)

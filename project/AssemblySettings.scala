@@ -9,7 +9,7 @@ object AssemblySettings extends AutoPlugin {
 
   override def projectSettings: Seq[Def.Setting[_]] = Seq(assemblyMergeStrategy := {
     // Discard module-info.class from jackson.  See https://github.com/sbt/sbt-assembly/issues/391
-    case "module-info.class"                                           => MergeStrategy.discard
+    case "module-info.class" => MergeStrategy.discard
     case x =>
       val oldStrategy = (assembly / assemblyMergeStrategy).value
       oldStrategy(x)

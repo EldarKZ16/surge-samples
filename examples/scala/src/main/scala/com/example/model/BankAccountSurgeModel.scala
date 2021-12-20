@@ -3,9 +3,9 @@
 package com.example.model
 
 import play.api.libs.json.Json
-import surge.core.{SerializedAggregate, SerializedMessage, SurgeAggregateReadFormatting, SurgeAggregateWriteFormatting, SurgeEventWriteFormatting}
+import surge.core.{ SerializedAggregate, SerializedMessage, SurgeAggregateReadFormatting, SurgeAggregateWriteFormatting, SurgeEventWriteFormatting }
 import surge.kafka.KafkaTopic
-import surge.scaladsl.command.{AggregateCommandModel, SurgeCommandBusinessLogic}
+import surge.scaladsl.command.{ AggregateCommandModel, SurgeCommandBusinessLogic }
 import com.example.account.BankAccount
 import com.example.command._
 import com.example.event._

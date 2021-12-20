@@ -2,7 +2,7 @@
 
 package com.example.http.serializer
 
-import com.example.http.request.{CreateAccountRequest, CreditAccountRequest, DebitAccountRequest}
+import com.example.http.request.{ CreateAccountRequest, CreditAccountRequest, DebitAccountRequest }
 import play.api.libs.json.Json
 
 trait BankAccountRequestSerializer {
