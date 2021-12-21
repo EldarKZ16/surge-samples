@@ -2,7 +2,7 @@
 
 package com.example.event
 
-import play.api.libs.json.{Format, JsValue, Json}
+import play.api.libs.json.{ Format, JsValue, Json }
 
 import java.util.UUID
 

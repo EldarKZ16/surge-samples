@@ -2,7 +2,7 @@
 
 package com.example.account
 
-import play.api.libs.json.{Format, Json}
+import play.api.libs.json.{ Format, Json }
 
 import java.util.UUID
 
