@@ -7,6 +7,7 @@ object Dependencies extends AutoPlugin {
 
     object Akka {
       val http = "com.typesafe.akka" %% "akka-http" % "10.2.6"
+      val spray = "com.typesafe.akka" %% "akka-http-spray-json" % "10.2.6"
     }
 
     val surge = "com.ukg" %% "surge-engine-command-scaladsl" % "0.5.45"

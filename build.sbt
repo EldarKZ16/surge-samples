@@ -12,7 +12,7 @@ lazy val `surge-scala-sample` = (project in file("examples/scala"))
   .settings(
     assembly / assemblyJarName := "surge-cmd-example-app.jar",
     assembly / mainClass := Some("com.example.boot"),
-    libraryDependencies ++= Seq(Akka.http, akkaHttpPlayJson, surge, gatling, gatlingFramework),
+    libraryDependencies ++= Seq(Akka.http, Akka.spray, akkaHttpPlayJson, surge, gatling, gatlingFramework),
     publish / skip := true)
   .enablePlugins(JavaServerAppPackaging, AssemblySettings)
 
