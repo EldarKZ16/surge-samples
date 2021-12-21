@@ -10,11 +10,9 @@ object Dependencies extends AutoPlugin {
       val spray = "com.typesafe.akka" %% "akka-http-spray-json" % "10.2.6"
     }
 
-    val surge = "com.ukg" %% "surge-engine-command-scaladsl" % "0.5.45-SNAPSHOT"
+    val surge = "com.ukg" %% "surge-engine-command-scaladsl" % "0.5.46-SNAPSHOT"
     val akkaHttpPlayJson = "de.heikoseeberger" %% "akka-http-play-json" % "1.38.2"
     val gatling = "io.gatling.highcharts" % "gatling-charts-highcharts" % "3.6.1" % Test
     val gatlingFramework = "io.gatling" % "gatling-test-framework" % "3.6.1" % Test
-    val embeddedKafkaVersion = "2.4.1.1"
-    val logbackVersion = "1.2.3"
   }
 }

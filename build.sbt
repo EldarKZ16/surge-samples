@@ -15,11 +15,3 @@ lazy val `surge-scala-sample` = (project in file("examples/scala"))
 lazy val `surge-gatling-sample` = (project in file("examples/surge-gatling"))
   .settings(libraryDependencies ++= Seq(gatling, gatlingFramework), publish / skip := true)
   .enablePlugins(GatlingPlugin)
-
-lazy val kafka = (project in file("kafka"))
-  .settings(
-    libraryDependencies ++= Seq(
-      "ch.qos.logback" % "logback-classic" % logbackVersion,
-      "org.slf4j" % "log4j-over-slf4j" % "1.7.26",
-      "io.github.embeddedkafka" %% "embedded-kafka" % embeddedKafkaVersion),
-    cancelable := false)
