@@ -10,6 +10,8 @@ object Dependencies extends AutoPlugin {
       val spray = "com.typesafe.akka" %% "akka-http-spray-json" % "10.2.6"
     }
 
+    val jacksonScala = "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.12.3"
+
     val surge = "com.ukg" %% "surge-engine-command-scaladsl" % "0.5.45"
     val akkaHttpPlayJson = "de.heikoseeberger" %% "akka-http-play-json" % "1.38.2"
     val gatling = "io.gatling.highcharts" % "gatling-charts-highcharts" % "3.6.1" % Test
