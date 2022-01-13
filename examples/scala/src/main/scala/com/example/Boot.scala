@@ -22,8 +22,8 @@ object Boot extends App with PlayJsonSupport with BankAccountRequestSerializer {
 
   implicit val system: ActorSystem = BankAccountEngine.surgeEngine.actorSystem
   BankAccountEngine.surgeEngine.start()
-  SecondBankAccountEngine.surgeEngine.start()
-  ThirdBankAccountEngine.surgeEngine.start()
+//  SecondBankAccountEngine.surgeEngine.start()
+//  ThirdBankAccountEngine.surgeEngine.start()
   private val log = LoggerFactory.getLogger(getClass)
   private val config = ConfigFactory.load()
 
