@@ -21,6 +21,9 @@ import scala.util.{ Failure, Success }
 object Boot extends App with PlayJsonSupport with BankAccountRequestSerializer {
 
   implicit val system: ActorSystem = BankAccountEngine.surgeEngine.actorSystem
+  BankAccountEngine.surgeEngine.start()
+  SecondBankAccountEngine.surgeEngine.start()
+  ThirdBankAccountEngine.surgeEngine.start()
   private val log = LoggerFactory.getLogger(getClass)
   private val config = ConfigFactory.load()
 
@@ -34,6 +37,44 @@ object Boot extends App with PlayJsonSupport with BankAccountRequestSerializer {
               MDC.put("account_number", createAccountCommand.accountNumber.toString)
               val createdAccountF: Future[CommandResult[BankAccount]] =
                 BankAccountEngine.surgeEngine.aggregateFor(createAccountCommand.accountNumber).sendCommand(createAccountCommand)
+
+              onComplete(createdAccountF) {
+                case Success(commandResult) =>
+                  commandResult match {
+                    case CommandSuccess(aggregateState) => complete(aggregateState)
+                    case CommandFailure(reason)         => complete(StatusCodes.BadRequest, Map("message" -> reason.getMessage))
+                  }
+                case Failure(_) => complete(StatusCodes.InternalServerError)
+              }
+            }
+          }
+        },
+        path("create-2") {
+          post {
+            entity(as[CreateAccountRequest]) { request =>
+              val createAccountCommand = requestToCommand(request)
+              MDC.put("account_number", createAccountCommand.accountNumber.toString)
+              val createdAccountF: Future[CommandResult[BankAccount]] =
+                SecondBankAccountEngine.surgeEngine.aggregateFor(createAccountCommand.accountNumber).sendCommand(createAccountCommand)
+
+              onComplete(createdAccountF) {
+                case Success(commandResult) =>
+                  commandResult match {
+                    case CommandSuccess(aggregateState) => complete(aggregateState)
+                    case CommandFailure(reason)         => complete(StatusCodes.BadRequest, Map("message" -> reason.getMessage))
+                  }
+                case Failure(_) => complete(StatusCodes.InternalServerError)
+              }
+            }
+          }
+        },
+        path("create-3") {
+          post {
+            entity(as[CreateAccountRequest]) { request =>
+              val createAccountCommand = requestToCommand(request)
+              MDC.put("account_number", createAccountCommand.accountNumber.toString)
+              val createdAccountF: Future[CommandResult[BankAccount]] =
+                ThirdBankAccountEngine.surgeEngine.aggregateFor(createAccountCommand.accountNumber).sendCommand(createAccountCommand)
 
               onComplete(createdAccountF) {
                 case Success(commandResult) =>

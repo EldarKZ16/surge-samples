@@ -39,9 +39,9 @@ spec:
           imagePullPolicy: Never
           resources:
             requests:
-              memory: "250Mi"
+              memory: "768Mi"
             limits:
-              memory: "250Mi"
+              memory: "768Mi"
           ports:
             - containerPort: 25520
               name: akka-remoting
@@ -50,10 +50,14 @@ spec:
               name: scala-app
               protocol: TCP
           env:
-            - name: "AKKA_REMOTING_HOST"
+            - name: "SURGE_ADVERTISED_HOSTNAME"
+              value: "<getKubernetesPodAddress>"
+            - name: "SURGE_BIND_HOSTNAME"
+              value: "0.0.0.0"
+            - name: "SURGE_KUBERNETES_NAMESPACE"
               valueFrom:
                 fieldRef:
-                  fieldPath: status.podIP
+                  fieldPath: metadata.namespace
             - name: "BANK_ACCOUNT_HOST"
               valueFrom:
                 fieldRef:
