@@ -12,14 +12,9 @@ import com.example.event._
 
 import java.util.UUID
 
-object BankAccountSurgeModel extends SurgeCommandBusinessLogic[UUID, BankAccount, BankAccountCommand, BankAccountEvent] {
+class BankAccountSurgeModel(override val aggregateName: String, override val stateTopic: KafkaTopic, override val eventsTopic: KafkaTopic)
+    extends SurgeCommandBusinessLogic[UUID, BankAccount, BankAccountCommand, BankAccountEvent] {
   override def commandModel: AggregateCommandModel[BankAccount, BankAccountCommand, BankAccountEvent] = BankAccountCommandModel
-
-  override def aggregateName: String = "bank-account"
-
-  override def stateTopic: KafkaTopic = KafkaTopic("bank-account-state")
-
-  override def eventsTopic: KafkaTopic = KafkaTopic("bank-account-events")
 
   override def aggregateReadFormatting: SurgeAggregateReadFormatting[BankAccount] = (bytes: Array[Byte]) => Json.parse(bytes).asOpt[BankAccount]
 
