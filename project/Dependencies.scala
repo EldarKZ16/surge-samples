@@ -16,5 +16,6 @@ object Dependencies extends AutoPlugin {
     val akkaHttpPlayJson = "de.heikoseeberger" %% "akka-http-play-json" % "1.38.2"
     val gatling = "io.gatling.highcharts" % "gatling-charts-highcharts" % "3.6.1" % Test
     val gatlingFramework = "io.gatling" % "gatling-test-framework" % "3.6.1" % Test
+    val logback = "ch.qos.logback" % "logback-classic" % "1.2.10"
   }
 }
