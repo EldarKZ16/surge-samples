@@ -12,9 +12,10 @@ object Dependencies extends AutoPlugin {
 
     val jacksonScala = "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.12.3"
 
-    val surge = "com.ukg" %% "surge-engine-command-scaladsl" % "0.5.48+5-8eebcdcc-SNAPSHOT"
+    val surge = "com.ukg" %% "surge-engine-command-scaladsl" % "0.5.47+6-8eebcdcc+20220117-2028-SNAPSHOT"
     val akkaHttpPlayJson = "de.heikoseeberger" %% "akka-http-play-json" % "1.38.2"
     val gatling = "io.gatling.highcharts" % "gatling-charts-highcharts" % "3.6.1" % Test
     val gatlingFramework = "io.gatling" % "gatling-test-framework" % "3.6.1" % Test
+    val logback = "ch.qos.logback" % "logback-classic" % "1.2.10"
   }
 }
